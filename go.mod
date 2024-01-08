@@ -1,6 +1,6 @@
 module github.com/herhe-com/template
 
-go 1.21
+go 1.20
 
 require (
 	github.com/cloudwego/hertz v0.7.3
@@ -8,7 +8,7 @@ require (
 	github.com/golang-module/carbon/v2 v2.3.4
 	github.com/gookit/color v1.5.4
 	github.com/gookit/goutil v0.6.15
-	github.com/herhe-com/framework v1.4.0
+	github.com/herhe-com/framework v1.4.1
 	github.com/manifoldco/promptui v0.9.0
 	github.com/samber/lo v1.39.0
 	github.com/spf13/cobra v1.8.0

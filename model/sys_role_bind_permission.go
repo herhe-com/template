@@ -1,6 +1,8 @@
 package model
 
 import (
+	"database/sql"
+
 	"github.com/golang-module/carbon/v2"
 	"gorm.io/gorm"
 )
@@ -8,14 +10,14 @@ import (
 const TableSysRoleBindPermission = "sys_role_bind_permission"
 
 type SysRoleBindPermission struct {
-	ID         uint           `gorm:"column:id;primaryKey"`
-	Platform   uint16         `gorm:"column:platform"`
-	PlatformID uint           `gorm:"column:platform_id"`
-	Module     string         `gorm:"column:module"`
-	RoleID     uint           `gorm:"column:role_id"`
-	Permission string         `gorm:"column:permission"`
-	CreatedAt  carbon.Carbon  `gorm:"column:created_at;autoCreateTime" carbon:"type:dateTime"`
-	DeletedAt  gorm.DeletedAt `gorm:"column:deleted_at"`
+	ID             uint           `gorm:"column:id;primaryKey"`
+	Platform       uint16         `gorm:"column:platform"`
+	OrganizationID sql.NullString `gorm:"column:organization_id"`
+	Module         string         `gorm:"column:module"`
+	RoleID         uint           `gorm:"column:role_id"`
+	Permission     string         `gorm:"column:permission"`
+	CreatedAt      carbon.Carbon  `gorm:"column:created_at;autoCreateTime" carbon:"type:dateTime"`
+	DeletedAt      gorm.DeletedAt `gorm:"column:deleted_at"`
 }
 
 func (SysRoleBindPermission) TableName() string {

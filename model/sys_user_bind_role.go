@@ -1,6 +1,8 @@
 package model
 
 import (
+	"database/sql"
+
 	"github.com/golang-module/carbon/v2"
 	"gorm.io/gorm"
 )
@@ -8,13 +10,13 @@ import (
 const TableSysUserBindRole = "sys_user_bind_role"
 
 type SysUserBindRole struct {
-	ID         uint           `gorm:"column:id;primaryKey"`
-	Platform   uint16         `gorm:"column:platform"`
-	PlatformID uint           `gorm:"column:platform_id"`
-	UserID     string         `gorm:"column:user_id"`
-	RoleID     uint           `gorm:"column:role_id"`
-	CreatedAt  carbon.Carbon  `gorm:"column:created_at;autoCreateTime" carbon:"type:dateTime"`
-	DeletedAt  gorm.DeletedAt `gorm:"column:deleted_at"`
+	ID             uint           `gorm:"column:id;primaryKey"`
+	Platform       uint16         `gorm:"column:platform"`
+	OrganizationID sql.NullString `gorm:"column:organization_id"`
+	UserID         string         `gorm:"column:user_id"`
+	RoleID         uint           `gorm:"column:role_id"`
+	CreatedAt      carbon.Carbon  `gorm:"column:created_at;autoCreateTime" carbon:"type:dateTime"`
+	DeletedAt      gorm.DeletedAt `gorm:"column:deleted_at"`
 
 	Role *SysRole `gorm:"foreignKey:RoleID;references:ID"`
 }

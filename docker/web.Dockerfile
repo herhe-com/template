@@ -16,7 +16,7 @@ COPY . .
 # Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
 
-WORKDIR /build/web
+WORKDIR /build/server/web
 
 # Build the Go app
 RUN CGO_ENABLED=0 go build -o application .
@@ -29,8 +29,8 @@ RUN apk --no-cache add ca-certificates tzdata
 WORKDIR /app
 
 # Copy the Pre-build binary file from the previous stage
-COPY --from=builder /build/web/application .
-COPY --from=builder /build/web/conf ./conf
+COPY --from=builder /build/server/web/application .
+COPY --from=builder /build/server/web/conf ./conf
 
 # Expose port 8080 to the outside world
 EXPOSE 9600

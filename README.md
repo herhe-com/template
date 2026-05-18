@@ -21,7 +21,7 @@ docker run \
   --name herhe-admin \
   --net uper \
   --ip 172.19.0.115 \
-  -v $PWD/conf:/app/conf \
+  -v $PWD/server/admin/conf:/app/conf \
   herhe/admin:1.0.0
 ```
 
@@ -41,6 +41,6 @@ docker run \
   --name herhe-web \
   --net uper \
   --ip 172.19.0.113 \
-  -v $PWD/conf:/app/conf \
+  -v $PWD/server/web/conf:/app/conf \
   herhe/web:1.0.0
 ```

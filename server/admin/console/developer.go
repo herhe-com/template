@@ -4,9 +4,9 @@ import (
 	"errors"
 	"github.com/gookit/color"
 	"github.com/herhe-com/framework/auth"
+	"github.com/herhe-com/framework/constants/global"
 	"github.com/herhe-com/framework/contracts/console"
 	"github.com/herhe-com/framework/facades"
-	"github.com/herhe-com/framework/support"
 	"github.com/herhe-com/framework/validation"
 	"github.com/herhe-com/template/model"
 	"github.com/manifoldco/promptui"
@@ -75,7 +75,7 @@ func (that *DeveloperProvider) Register() console.Console {
 					Username: &username,
 					Nickname: nickname,
 					Password: auth.Password(password),
-					IsEnable: support.YES,
+					IsEnable: global.YES,
 				}
 
 				if cu := tx.Create(&user); cu.Error != nil {

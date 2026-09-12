@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/herhe-com/framework/auth"
+	"github.com/herhe-com/framework/constants/global"
 	"github.com/herhe-com/framework/contracts/http/response"
 	"github.com/herhe-com/framework/facades"
 	"github.com/herhe-com/framework/http"
-	"github.com/herhe-com/framework/support"
 	"github.com/herhe-com/template/model"
 	req "github.com/herhe-com/template/server/admin/http/request/site"
 	res "github.com/herhe-com/template/server/admin/http/response/site"
@@ -329,7 +329,7 @@ func DoUserByUpdate(c context.Context, ctx *app.RequestContext) {
 
 		_ = facades.Database().Default().Model(&user).Association("BindRoles").Find(&bindings)
 
-		if request.IsEnable == support.YES && user.IsEnable == support.NO {
+		if request.IsEnable == global.YES && user.IsEnable == global.NO {
 			//	启用用户角色
 
 			items := make([]string, len(bindings))
@@ -344,7 +344,7 @@ func DoUserByUpdate(c context.Context, ctx *app.RequestContext) {
 				return
 			}
 
-		} else if request.IsEnable == support.NO && user.IsEnable == support.YES {
+		} else if request.IsEnable == global.NO && user.IsEnable == global.YES {
 			//	禁用用户角色
 
 			for _, item := range bindings {
@@ -447,7 +447,7 @@ func DoUserByEnable(c context.Context, ctx *app.RequestContext) {
 
 	if request.IsEnable != user.IsEnable {
 
-		if request.IsEnable == support.YES && user.IsEnable == support.NO {
+		if request.IsEnable == global.YES && user.IsEnable == global.NO {
 			//	启用用户角色
 
 			items := make([]string, len(user.BindRoles))
@@ -462,7 +462,7 @@ func DoUserByEnable(c context.Context, ctx *app.RequestContext) {
 				return
 			}
 
-		} else if request.IsEnable == support.NO && user.IsEnable == support.YES {
+		} else if request.IsEnable == global.NO && user.IsEnable == global.YES {
 			//	禁用用户角色
 
 			for _, item := range user.BindRoles {

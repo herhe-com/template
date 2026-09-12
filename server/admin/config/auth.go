@@ -14,8 +14,10 @@ func init() {
 			"table": cfg.Env("auth.casbin.table", "sys_casbin"),
 		},
 		"platforms": []uint16{auth.CodeOfPlatform, auth.CodeOfClique, auth.CodeOfStore},
-		"permissions": []contractauth.Permission{
-			site(),
+		"permissions": func() []contractauth.Permission {
+			return []contractauth.Permission{
+				site(),
+			}
 		},
 	})
 }

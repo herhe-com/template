@@ -11,5 +11,10 @@ func init() {
 		"secret":   cfg.Env("jwt.secret", ""),
 		"leeway":   cfg.Env("jwt.leeway", 3),
 		"lifetime": cfg.Env("jwt.lifetime", 60*24),
+		"refresh": map[string]any{
+			"mode":     cfg.Env("jwt.refresh.mode", "blacklist"),
+			"lifetime": cfg.Env("jwt.refresh.lifetime", 30),
+			"leeway":   cfg.Env("jwt.refresh.leeway", 3),
+		},
 	})
 }

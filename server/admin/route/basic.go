@@ -13,7 +13,7 @@ func BasicRouter(router *server.Hertz) {
 
 		login := route.Group("login")
 		{
-			login.POST("account", basic.DoLoginOfAccount)
+			login.POST("account", middleware.LoginLimiter(), basic.DoLoginOfAccount)
 		}
 
 		account := route.Group("account").Use(middleware.Auth())

@@ -50,20 +50,24 @@ func DoLoginOfAccount(c context.Context, ctx *app.RequestContext) {
 		return
 	}
 
-	lifetime := facades.Config().GetInt("jwt.lifetime")
-
-	var err error
-	var token string
-
-	if token, err = auth.NewJWToken(user.ID, lifetime, true, nil); err != nil {
+	pair, err := auth.NewLoginJWToken(user.ID, true, nil)
+	if err != nil {
 		http.Login(ctx)
 		return
 	}
 
 	responses := res.DoLogin{
-		Token:    token,
-		Lifetime: lifetime,
+		SessionID:       pair.SessionID,
+		AccessToken:     pair.AccessToken,
+		RefreshToken:    pair.RefreshToken,
+		IssuedAt:        pair.IssuedAt,
+		AccessLifetime:  pair.AccessLifetime,
+		RefreshLifetime: pair.RefreshLifetime,
+		GraceLifetime:   pair.GraceLifetime,
 	}
+
+	ctx.Header("Cache-Control", "no-store")
+	ctx.Header("Pragma", "no-cache")
 
 	http.Success(ctx, responses)
 }
